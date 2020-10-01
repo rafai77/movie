@@ -6,4 +6,9 @@ class EndPoint {
       Constants.KEY +
       Constants.Language +
       Constants.Page;
+  static const Top = Constants.DOMAIN +
+      Constants.Top_rated +
+      Constants.KEY +
+      Constants.Language +
+      Constants.Page;
 }

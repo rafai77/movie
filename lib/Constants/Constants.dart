@@ -5,14 +5,4 @@ class Constants {
   static const String Top_rated = "top_rated?api_key=";
   static const String Language = "&language=en-US";
   static const String Page = "&page=";
-
-  static int pag = 1;
-
-  static void setPage(int x) {
-    pag = x;
-  }
-
-  static int getPage() {
-    return pag;
-  }
 }
