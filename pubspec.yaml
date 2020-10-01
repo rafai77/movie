@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: any
+  date_format: ^1.0.9
   shared_preferences: any
   connectivity: 0.4.5+3
 

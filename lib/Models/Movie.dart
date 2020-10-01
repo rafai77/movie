@@ -8,7 +8,7 @@ class Movieinfo {
   String backdrop_path;
   String original_language;
   String original_title;
-  List<int> genre_ids;
+  List<dynamic> genre_ids;
   String title;
   dynamic vote_average;
   String overview;
@@ -29,4 +29,26 @@ class Movieinfo {
       this.vote_average,
       this.overview,
       this.release_date);
+
+  static List<Movieinfo> Jondec(result) {
+    List<Movieinfo> aux = [];
+    for (var i in result)
+      aux.add(Movieinfo(
+          i["popularity"],
+          i["vote_count"],
+          i["video"],
+          i["poster_path"],
+          i["id"],
+          i["adult"],
+          i["backdrop_path"],
+          i["original_language"],
+          i["original_title"],
+          i["genre_ids"],
+          i["title"],
+          i["vote_average"],
+          i["overview"],
+          i["release_date"]));
+
+    return aux;
+  }
 }
