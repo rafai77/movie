@@ -136,184 +136,173 @@ class _InfomovieState extends State<Infomovie> {
       Container(
           width: MediaQuery.of(context).size.width * .9,
           height: MediaQuery.of(context).size.height * .9,
-          child: Flexible(
-              child: Container(
-                  width: MediaQuery.of(context).size.width * .9,
-                  height: MediaQuery.of(context).size.height * .9,
-                  child: Column(
+          child: Container(
+              width: MediaQuery.of(context).size.width * .9,
+              height: MediaQuery.of(context).size.height * .9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                              width: MediaQuery.of(context).size.width * .40,
-                              height: MediaQuery.of(context).size.height * .3,
-                              padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * .02,
-                                top: MediaQuery.of(context).size.height * .01,
-                              ),
-                              alignment: Alignment.bottomLeft,
-                              child: Image.network(
-                                  Constants.Imagedom + movie.poster_path)),
-                          Flexible(
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                top: 5,
-                              ),
-                              child: Column(children: <Widget>[
-                                Container(
-                                  child: Center(
-                                    child: Text(
-                                      movie.original_title,
-                                      style: TextStyle(
-                                          fontFamily: 'Source Sans Pro',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height *
-                                          .02),
-                                  child: Center(
-                                    child: Text(
-                                      movie.title,
-                                      style: TextStyle(
-                                        fontFamily: 'Ewert',
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height *
-                                          .02),
-                                  child: Center(
-                                    child: Text(
-                                      genname.toString(),
-                                      style: TextStyle(
-                                        fontFamily: 'Ewert',
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height *
-                                          .02),
-                                  child: Center(
-                                    child: Text(
-                                      "Estreno : " + movie.release_date + " ",
-                                      style: TextStyle(
-                                        fontFamily: 'Ewert',
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Row(children: <Widget>[
-                                  Container(
-                                      margin: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .05,
-                                          bottom: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              .05,
-                                          top: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              .05),
-                                      decoration: BoxDecoration(
-                                          color: Colors.lightGreen,
-                                          border: Border.all(
-                                            color: Colors.black26,
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(100))),
-                                      child: Text(
-                                        " " +
-                                            (movie.vote_average * 10)
-                                                .toString() +
-                                            "% ",
-                                        style: TextStyle(
-                                            fontFamily: 'Ewert',
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                  Container(
-                                      margin: EdgeInsets.only(left: 5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          border: Border.all(
-                                            color: Colors.black26,
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50))),
-                                      child: Text(
-                                        (" Idioma Original: " +
-                                                movie.original_language
-                                                    .toUpperCase()) +
-                                            "  ",
-                                        style: TextStyle(
-                                            fontFamily: 'RobotoMono',
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                ]),
-                              ]),
-                            ),
-                          )
-                        ],
-                      ),
-                      Center(
-                          child: Flexible(
-                              child: Container(
-                        margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * .015),
-                        child: Text(
-                          "Sinopsis",
-                          style: TextStyle(color: Colors.black, fontSize: 25),
-                        ),
-                      ))),
+                      Container(
+                          width: MediaQuery.of(context).size.width * .40,
+                          height: MediaQuery.of(context).size.height * .3,
+                          padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * .02,
+                            top: MediaQuery.of(context).size.height * .01,
+                          ),
+                          alignment: Alignment.bottomLeft,
+                          child: Image.network(
+                              Constants.Imagedom + movie.poster_path)),
                       Flexible(
-                          child: Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * .05),
-                        decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            top: 5,
+                          ),
+                          child: Column(children: <Widget>[
+                            Container(
+                              child: Center(
+                                child: Text(
+                                  movie.original_title,
+                                  style: TextStyle(
+                                      fontFamily: 'Source Sans Pro',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ),
-                          ],
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * .02),
+                              child: Center(
+                                child: Text(
+                                  movie.title,
+                                  style: TextStyle(
+                                    fontFamily: 'Ewert',
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * .02),
+                              child: Center(
+                                child: Text(
+                                  genname.toString(),
+                                  style: TextStyle(
+                                    fontFamily: 'Ewert',
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * .02),
+                              child: Center(
+                                child: Text(
+                                  "Estreno : " + movie.release_date + " ",
+                                  style: TextStyle(
+                                    fontFamily: 'Ewert',
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Row(children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width *
+                                          .05,
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .05,
+                                      top: MediaQuery.of(context).size.height *
+                                          .05),
+                                  decoration: BoxDecoration(
+                                      color: Colors.lightGreen,
+                                      border: Border.all(
+                                        color: Colors.black26,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(100))),
+                                  child: Text(
+                                    " " +
+                                        (movie.vote_average * 10).toString() +
+                                        "% ",
+                                    style: TextStyle(
+                                        fontFamily: 'Ewert',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                              Container(
+                                  margin: EdgeInsets.only(left: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      border: Border.all(
+                                        color: Colors.black26,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50))),
+                                  child: Text(
+                                    (" Idioma Original: " +
+                                            movie.original_language
+                                                .toUpperCase()) +
+                                        "  ",
+                                    style: TextStyle(
+                                        fontFamily: 'RobotoMono',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ]),
+                          ]),
                         ),
-                        child: Text(
-                          movie.overview,
-                          style: TextStyle(
-                              color: Colors.black87,
-                              fontStyle: FontStyle.italic),
-                        ),
-                      )),
+                      )
                     ],
-                  )))),
+                  ),
+                  Center(
+                      child: Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * .015),
+                    child: Text(
+                      "Sinopsis",
+                      style: TextStyle(color: Colors.black, fontSize: 25),
+                    ),
+                  )),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * .05),
+                    decoration: BoxDecoration(
+                      //color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      movie.overview,
+                      style: TextStyle(
+                          color: Colors.black87, fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
+              ))),
     ]);
   }
 }
