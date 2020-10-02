@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
     return TabBarView(
       children: [
         Popular(),
-        TopMovies(),
+        TopMovies(true),
       ],
     );
   }

@@ -30,3 +30,13 @@ flutter:
 
   uses-material-design: true
 
+fonts:
+  - family: VT323
+    fonts:
+      - https://fonts.google.com/specimen/VT323
+      # asset: fonts/VT323-Regular.ttf
+  - family: Ewert
+    fonts:
+      - https://fonts.google.com/specimen/Ewert
+      # asset: fonts/Ewert-Regular.ttf
+

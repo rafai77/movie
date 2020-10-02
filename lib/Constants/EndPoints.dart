@@ -11,4 +11,6 @@ class EndPoint {
       Constants.KEY +
       Constants.Language +
       Constants.Page;
+  static const Gener =
+      Constants.DOMAING + "list?api_key=" + Constants.KEY + Constants.Language;
 }

@@ -9,19 +9,25 @@ import 'package:http/http.dart' as http;
 import 'package:movie/Constants/Constants.dart';
 import 'package:movie/Constants/EndPoints.dart';
 import 'package:movie/Models/Movie.dart';
+import 'package:movie/pages/Info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //pagina de inicio donde se cargaran las peliculas
 
 class TopMovies extends StatefulWidget {
+  bool top;
+  TopMovies(this.top);
   @override
-  _TopMoviesState createState() => _TopMoviesState();
+  _TopMoviesState createState() => _TopMoviesState(this.top);
 }
 
 class _TopMoviesState extends State<TopMovies> {
   int page = 1;
   int total_result = 0;
   int total_pages = 0;
+  bool top;
+  var endpoint = "";
+  _TopMoviesState(this.top);
   StreamController<List<Movieinfo>> MovieTop =
       StreamController<List<Movieinfo>>();
   List<Movieinfo> aux = List<Movieinfo>();
@@ -29,6 +35,10 @@ class _TopMoviesState extends State<TopMovies> {
   @override
   void initState() {
     // TODO: implement initState
+    if (top)
+      endpoint = EndPoint.Top;
+    else
+      endpoint = EndPoint.Popular;
     movies();
     super.initState();
   }
@@ -81,120 +91,100 @@ class _TopMoviesState extends State<TopMovies> {
                                         page++;
                                         movies();
                                       }
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 1,
-                                                blurRadius: 7,
-                                                offset: Offset(0,
-                                                    2), // changes position of shadow
-                                              ),
-                                            ],
-                                            border: Border.all(
-                                              color: Colors.black26,
-                                              width: 1,
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25))),
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .2,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .2,
-                                        margin: EdgeInsets.only(bottom: 15),
-                                        padding: EdgeInsets.only(bottom: 8),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Container(
-                                                padding: EdgeInsets.only(
-                                                  left: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .02,
-                                                  top: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      .01,
+                                      return GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Infomovie(snapshot
+                                                            .data[index])));
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 7,
+                                                    offset: Offset(0,
+                                                        2), // changes position of shadow
+                                                  ),
+                                                ],
+                                                border: Border.all(
+                                                  color: Colors.black26,
+                                                  width: 1,
                                                 ),
-                                                alignment: Alignment.bottomLeft,
-                                                child: Image.network(
-                                                    Constants.Imagedom +
-                                                        snapshot.data[index]
-                                                            .poster_path)),
-                                            Flexible(
-                                                child: Container(
-                                                    margin:
-                                                        EdgeInsets.only(top: 5),
-                                                    child: Column(
-                                                      children: <Widget>[
-                                                        Center(
-                                                          child: Text(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25))),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .3,
+                                            margin: EdgeInsets.only(bottom: 15),
+                                            padding: EdgeInsets.only(bottom: 8),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                    padding: EdgeInsets.only(
+                                                      left:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              .02,
+                                                      top:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              .01,
+                                                    ),
+                                                    alignment:
+                                                        Alignment.bottomLeft,
+                                                    child: Image.network(
+                                                        Constants.Imagedom +
                                                             snapshot.data[index]
-                                                                .original_title,
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    'RobotoMono',
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          margin: EdgeInsets.only(
-                                                              bottom: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .07),
-                                                          child: Text(
-                                                            "(" +
+                                                                .poster_path)),
+                                                Flexible(
+                                                    child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: 5),
+                                                        child: Column(
+                                                          children: <Widget>[
+                                                            Center(
+                                                              child: Text(
                                                                 snapshot
                                                                     .data[index]
-                                                                    .title +
-                                                                ")",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    'RobotoMono',
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ),
-                                                        Row(children: <Widget>[
-                                                          Container(
+                                                                    .original_title,
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        'RobotoMono',
+                                                                    fontSize:
+                                                                        15,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ),
+                                                            Container(
                                                               margin: EdgeInsets.only(
-                                                                  left: MediaQuery.of(
+                                                                  bottom: MediaQuery.of(
                                                                               context)
                                                                           .size
                                                                           .width *
-                                                                      .22),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Colors
-                                                                          .lightGreen,
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .black26,
-                                                                        width:
-                                                                            1,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.all(
-                                                                              Radius.circular(100))),
+                                                                      .07),
                                                               child: Text(
-                                                                (snapshot.data[index].vote_average *
-                                                                            10)
-                                                                        .toString() +
-                                                                    "%",
+                                                                "(" +
+                                                                    snapshot
+                                                                        .data[
+                                                                            index]
+                                                                        .title +
+                                                                    ")",
                                                                 style: TextStyle(
                                                                     fontFamily:
                                                                         'RobotoMono',
@@ -203,69 +193,90 @@ class _TopMoviesState extends State<TopMovies> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
-                                                              )),
-                                                          Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      left: 5),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      color: Colors
-                                                                              .grey[
-                                                                          300],
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .black26,
-                                                                        width:
-                                                                            1,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.all(
-                                                                              Radius.circular(50))),
-                                                              child: Text(
-                                                                ("  " + snapshot.data[index].original_language)
-                                                                        .toUpperCase() +
-                                                                    "  ",
-                                                                style: TextStyle(
-                                                                    fontFamily:
-                                                                        'RobotoMono',
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              )),
-                                                        ]),
-                                                        Container(
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                              top: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  .05,
+                                                              ),
                                                             ),
-                                                            child: Text(
-                                                              "Estreno  " +
-                                                                  (snapshot
-                                                                      .data[
-                                                                          index]
-                                                                      .release_date),
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'RobotoMono',
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal),
-                                                            )),
-                                                      ],
-                                                    )))
-                                          ],
-                                        ),
-                                      );
+                                                            Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          left: MediaQuery.of(context).size.width *
+                                                                              .15),
+                                                                      decoration: BoxDecoration(
+                                                                          color: Colors.lightGreen,
+                                                                          border: Border.all(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            width:
+                                                                                1,
+                                                                          ),
+                                                                          borderRadius: BorderRadius.all(Radius.circular(100))),
+                                                                      child: Text(
+                                                                        (snapshot.data[index].vote_average * 10).toString() +
+                                                                            "%",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'RobotoMono',
+                                                                            fontSize:
+                                                                                12,
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )),
+                                                                  Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          left:
+                                                                              5),
+                                                                      decoration: BoxDecoration(
+                                                                          color: Colors.grey[300],
+                                                                          border: Border.all(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            width:
+                                                                                1,
+                                                                          ),
+                                                                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                                                                      child: Text(
+                                                                        ("  " + snapshot.data[index].original_language).toUpperCase() +
+                                                                            "  ",
+                                                                        style: TextStyle(
+                                                                            fontFamily:
+                                                                                'RobotoMono',
+                                                                            fontSize:
+                                                                                12,
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )),
+                                                                ]),
+                                                            Container(
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  top: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      .03,
+                                                                ),
+                                                                child: Text(
+                                                                  "Estreno  " +
+                                                                      (snapshot
+                                                                          .data[
+                                                                              index]
+                                                                          .release_date),
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'RobotoMono',
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal),
+                                                                )),
+                                                          ],
+                                                        )))
+                                              ],
+                                            ),
+                                          ));
                                     }),
                               ),
                             ),
@@ -335,10 +346,10 @@ class _TopMoviesState extends State<TopMovies> {
         .checkConnectivity(); // para verfificar si tiene algun tipo de conexion
     if (conecctionResult != ConnectivityResult.none) {
       try {
-        response = await http.get(EndPoint.Top + page.toString()).timeout(
+        response = await http.get(endpoint + page.toString()).timeout(
             const Duration(
                 seconds:
-                    20)); // si no se optienen resdpuesta en 20 seg se toma como error
+                    15)); // si no se optienen resdpuesta en 20 seg se toma como error
       } on TimeoutException catch (_) {
         setState(() {
           _showMyDialog('Sin conexion al servidor\n');

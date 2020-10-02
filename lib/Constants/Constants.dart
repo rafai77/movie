@@ -6,4 +6,5 @@ class Constants {
   static const String Language = "&language=es";
   static const String Page = "&page=";
   static const String Imagedom = "https://image.tmdb.org/t/p/w500";
+  static const String DOMAING = "https://api.themoviedb.org/3/genre/";
 }
